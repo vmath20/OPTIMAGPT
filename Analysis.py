@@ -104,3 +104,45 @@ plt.legend(loc='upper left', bbox_to_anchor=(0.75, 0.2))
 # Show the plot
 plt.show()
 
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Data
+models = ['BERT', 'RoBERTa', 'BioBERT', 'ClinicalBERT', 'DistilBERT', 'ChatGPT-3.5']
+precision_drug = [1.00, 0.89, 1.00, 0.91, 1.00, 0.92]
+recall_drug = [0.76, 0.76, 0.72, 0.73, 0.73, 0.81]
+f1_drug = [0.86, 0.82, 0.84, 0.81, 0.85, 0.87]
+
+precision_laterality = [0.77, 0.80, 0.79, 0.86, 0.78, 0.72]
+recall_laterality = [0.76, 0.74, 0.84, 0.84, 0.83, 0.94]
+f1_laterality = [0.76, 0.77, 0.82, 0.85, 0.80, 0.82]
+
+# Set up the figure and axes
+fig, ax = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
+
+# Plot grouped bar charts for Drug Label
+width = 0.2
+x = np.arange(len(models))
+
+ax[0].bar(x - width, precision_drug, width, label='Precision')
+ax[0].bar(x, recall_drug, width, label='Recall')
+ax[0].bar(x + width, f1_drug, width, label='F1 Score')
+
+ax[0].set_title('Drug Label Performance Metrics')
+ax[0].set_xticks(x)
+ax[0].set_xticklabels(models)
+ax[0].legend(loc='upper left', bbox_to_anchor=(0.85, 0.3))
+
+# Plot grouped bar charts for Laterality Label
+ax[1].bar(x - width, precision_laterality, width, label='Precision')
+ax[1].bar(x, recall_laterality, width, label='Recall')
+ax[1].bar(x + width, f1_laterality, width, label='F1 Score')
+
+ax[1].set_title('Laterality Label Performance Metrics')
+ax[1].set_xticks(x)
+ax[1].set_xticklabels(models)
+ax[1].legend(loc='upper left', bbox_to_anchor=(0.85, 0.3))
+
+# Show the plots
+plt.tight_layout()
+plt.show()
